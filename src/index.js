@@ -4,10 +4,13 @@ const app = express();
 
 const cors = require("cors");
 
-app.use(cors());
+const userRoutes = require("./routes/userRoutes");
 
-app.get("/", (req, res)=>{
-    res.send(`Server started listening on PORT ${process.env.PORT}`);
-})
+app.use(cors());
+app.use(express.json());
+
+app.use(express.urlencoded({ extended : true }));
+
+app.use("/users", userRoutes);
 
 module.exports = app;
