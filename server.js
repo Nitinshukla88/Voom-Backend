@@ -9,11 +9,11 @@ const server = http.createServer(app);
 
 const PORT = process.env.PORT || 3000;
 
-// connectDB().then(()=> {
-//     console.log("Database connected Successfully");
+connectDB().then(()=> {
+    console.log("Database connected Successfully");
 
     
-// }).catch(()=> console.log("Database is not connected !"))
+}).catch(()=> console.log("Database is not connected !"))
 
 
 server.listen(PORT, ()=>{

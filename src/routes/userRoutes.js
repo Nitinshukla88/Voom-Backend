@@ -4,7 +4,9 @@ const userRouter = express.Router();
 
 const { body } = require("express-validator");
 
-const {registerUser, loginUser} = require("../cantrollers/userCantroller");
+const {registerUser, loginUser, getUserProfile, logoutUser} = require("../cantrollers/userCantroller");
+
+const userAuth = require("../middlewares/userAuth");
 
 userRouter.post("/register",[
     body("email").isEmail().withMessage("Invalid Email"),
@@ -16,5 +18,9 @@ userRouter.post("/login", [
     body("email").isEmail().withMessage("Invalid Email"),
     body("password").isLength({ min : 8 }).withMessage("password must be at least 8 characters long!")
 ], loginUser);
+
+userRouter.get("/profile", userAuth, getUserProfile);
+
+userRouter.post("/logout", userAuth, logoutUser)
 
 module.exports = userRouter;
