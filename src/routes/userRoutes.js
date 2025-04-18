@@ -6,7 +6,7 @@ const { body } = require("express-validator");
 
 const {registerUser, loginUser, getUserProfile, logoutUser} = require("../cantrollers/userCantroller");
 
-const userAuth = require("../middlewares/userAuth");
+const { userAuth } = require("../middlewares/auth");
 
 userRouter.post("/register",[
     body("email").isEmail().withMessage("Invalid Email"),
