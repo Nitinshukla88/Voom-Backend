@@ -85,10 +85,11 @@ const loginUser = async(req, res) =>{
 
         res.cookie("token", token, {
             httpOnly : true,
-            sameSite : "strict",
+            sameSite : "lax",
+            secure : false
         });
 
-        return res.json({ token : token, user });
+        return res.json({ user });
 
     }catch(error){
         console.log(error);
