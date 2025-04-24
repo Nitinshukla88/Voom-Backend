@@ -41,6 +41,14 @@ const registerCaptain = async(req, res) => {
             }
         });
 
+        const token = await newCaptain.generateAuthToken();
+
+        res.cookie("token", token, {
+            httpOnly : true,
+            sameSite : "lax",
+            secure : false
+        })
+
         await newCaptain.save();
 
         return res.json( { message : "Captain Registered Successfully", captain : newCaptain });
@@ -85,10 +93,11 @@ const loginCaptain = async(req, res) => {
 
         res.cookie("token", token, {
             httpOnly : true,
-            sameSite : "strict"
+            sameSite : "lax",
+            secure : false
         });
 
-        return res.json({ token : token, captain });
+        return res.json({ captain });
 
     }catch(error){
         console.log(error);

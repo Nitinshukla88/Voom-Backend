@@ -44,9 +44,15 @@ const registerUser = async(req, res) => {
 
         const token = await newUser.generateAuthToken();
 
+        res.cookie("token", token, {
+            httpOnly : true,
+            sameSite : "lax",
+            secure : false
+        })
+
         await newUser.save();
 
-        return res.json({ token : token , newUser });
+        return res.json({ newUser });
 
     }catch(error){
         console.log(error);
